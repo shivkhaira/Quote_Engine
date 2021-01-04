@@ -26,14 +26,22 @@ const App=()=>{
   const [p_price,setP]=useState(0)
   const [width,setWidth]=useState('')
   const [height,setHeight]=useState('')
-
+  const [measure,setMeasure]=useState(false)
 
   useEffect(()=>{
   if(step===4)
   {
+
+ 
+    if(color!==null && hardware!==null && style!=='')
+    {
+      setMeasure(true)
+    }
+
     if(width!=='' && height!=='')
     {
       setActive(true)
+     
     }
     else
     {
@@ -42,7 +50,7 @@ const App=()=>{
   }
  
 
-  },[width,height,active,step])
+  },[width,height,active,step,color,hardware,style])
 
   const StyleSwitch=()=>{
     switch(style){
@@ -96,7 +104,7 @@ const App=()=>{
         )
        
       default:
-        return 'Measurement Details';
+        return '';
     }
   }
 
@@ -160,6 +168,7 @@ const App=()=>{
     setHeight('')
     setStyle('')
     setActive(false)
+    setMeasure(false)
   }
 
   if(step===5)
@@ -202,7 +211,7 @@ const App=()=>{
        <div>
          <RenderSwitch />
 
-         {step===4 &&<Measure height={height} setHeight={setHeight} width={width} setWidth={setWidth}/>}
+         {step===4 && (measure? <Measure height={height} setHeight={setHeight} width={width} setWidth={setWidth} />:"Select all details")}
        </div>
       {image!==0 && <div className="right">
       <img src={image} className="image_t" alt="Window" /><br />
