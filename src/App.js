@@ -140,6 +140,7 @@ const App=()=>{
   
     img.onload = () => {
       // when it finishes loading, update the component state
+      console.log("fgsdb")
       setImage(style)
     }
     setColor(n)
