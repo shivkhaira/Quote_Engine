@@ -14,6 +14,8 @@ import style3 from './images/Window Images/Window Style thumbnail/style3.png'
 
 import Measure from './components/measure/measure'
 
+import LoadingSpinner from './components/LoadSpin/loading'
+
 const App=()=>{
 
   const [step,setStep]=useState(1)
@@ -27,6 +29,7 @@ const App=()=>{
   const [width,setWidth]=useState('')
   const [height,setHeight]=useState('')
   const [measure,setMeasure]=useState(false)
+  const [loading,setLoading]=useState(false)
 
   useEffect(()=>{
   if(step===4)
@@ -119,12 +122,14 @@ const App=()=>{
   }
 
   const HardwareHandler=(n,style,priced)=>{
+    setLoading(true)
     setHardware(n)
     setActive(true)
     const img = new Image();
     img.src = style; // by setting an src, you trigger browser download
   
     img.onload = () => {
+      setLoading(false)
       // when it finishes loading, update the component state
       console.log("dgd")
     }
@@ -135,12 +140,13 @@ const App=()=>{
   }
 
   const ColorHandler=(n,style,priced)=>{
+    setLoading(true)
     const img = new Image();
     img.src = style; // by setting an src, you trigger browser download
   
     img.onload = () => {
       // when it finishes loading, update the component state
-      console.log("fgsdb")
+      setLoading(false)
       setImage(style)
     }
     setColor(n)
@@ -213,6 +219,8 @@ const App=()=>{
   }
 
   return (
+    <React.Fragment>
+      {loading && <LoadingSpinner asOverlay />}
     <div className="App left">
       <header className="App-header">
        <div className="left">
@@ -235,9 +243,8 @@ const App=()=>{
       </div>  }
        <button onClick={nextHandler} disabled={active?false:true}>Next</button>
       </header>
-
-     
     </div>
+    </React.Fragment>
   );
 }
 
