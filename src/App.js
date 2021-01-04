@@ -121,6 +121,13 @@ const App=()=>{
   const HardwareHandler=(n,style,priced)=>{
     setHardware(n)
     setActive(true)
+    const img = new Image();
+    img.src = style; // by setting an src, you trigger browser download
+  
+    img.onload = () => {
+      // when it finishes loading, update the component state
+      console.log("dgd")
+    }
     setImage(style)
     let prices=price-p_price+priced
     setPrice(prices)
@@ -128,9 +135,16 @@ const App=()=>{
   }
 
   const ColorHandler=(n,style,priced)=>{
+    const img = new Image();
+    img.src = style; // by setting an src, you trigger browser download
+  
+    img.onload = () => {
+      // when it finishes loading, update the component state
+      setImage(style)
+    }
     setColor(n)
     setActive(true)
-    setImage(style)
+    
     let prices=price-p_price+priced
     setPrice(prices)
     setP(priced)
